@@ -24,8 +24,25 @@ CREATE TABLE biological
 	   		FROM stroke_predictors
 );
 
+ALTER TABLE "demographic" ADD CONSTRAINT "fk_demographic_id" FOREIGN KEY("id")
+REFERENCES "stroke_predictors" ("id");
 
+ALTER TABLE "biological" ADD CONSTRAINT "fk_biological_id" FOREIGN KEY("id")
+REFERENCES "stroke_predictors" ("id");
+
+
+--#1
+--imported healthcare-dataset-stroke-data.csv to stroke_predictors table
+--check if the data is imported correctly
 
 SELECT * FROM stroke_predictors;
+
+--#2
+--imported demographic-data.csv to demographic table
+--check if the data is imported correctly
 SELECT * FROM demographic;
+
+--#3
+--imported biological-data.csv to biological table
+--check if the data is imported correctly
 SELECT * FROM biological;
