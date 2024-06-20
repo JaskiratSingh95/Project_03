@@ -13,5 +13,3 @@ c.execute('''CREATE TABLE stroke_info ( ID int, gender text, age int, hypertensi
 
 csv_stroke = pd.read_csv("./Resources/healthcare-dataset-stroke-data.csv")
 csv_stroke.to_sql("stroke_info", conn, if_exists='append', index=False)
-
-conn.close()
