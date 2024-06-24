@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heatmaps</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .heatmap-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        .heatmap {
+            width: 800px;
+            height: 600px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="heatmap-container">
+        <div id="heatmap-stroke" class="heatmap"></div>
+        <div id="heatmap-no-stroke" class="heatmap"></div>
+    </div>
+
+    <script>
+        // JSON data for heatmaps
+        const ctPropStroke = JSON.parse(`{"columns":[["Govt_job","Rural"],["Govt_job","Urban"],["Private","Rural"],["Private","Urban"],["Self-employed","Rural"],["Self-employed","Urban"],["children","Rural"],["children","Urban"]],"index":["No","Yes"],"data":[[0.0344827586,0.1724137931,0.1724137931,0.3103448276,0.0344827586,0.2068965517,0.0344827586,0.0344827586],[0.0590909091,0.0636363636,0.2863636364,0.3272727273,0.1363636364,0.1272727273,0.0,0.0]]}`);
+        
+        const ctPropNoStroke = JSON.parse(`{"columns":[["Govt_job","Rural"],["Govt_job","Urban"],["Never_worked","Rural"],["Never_worked","Urban"],["Private","Rural"],["Private","Urban"],["Self-employed","Rural"],["Self-employed","Urban"],["children","Rural"],["children","Urban"]],"index":["No","Yes"],"data":[[0.03125,0.0329861111,0.0040509259,0.0086805556,0.2384259259,0.228587963,0.0300925926,0.0295138889,0.1961805556,0.2002314815],[0.0778806256,0.0858601979,0.0,0.0,0.3134375997,0.3150335142,0.0989466965,0.1088413661,0.0,0.0]]}`);
+
+        // Function to convert data to Plotly format
+        function prepareHeatmapData(ctProp) {
+            return {
+                z: ctProp.data,
+                x: ctProp.columns.map(col => col.join(' - ')),
+                y: ctProp.index,
+                type: 'heatmap',
+                colorscale: 'YlGnBu',
+                showscale: true,
+                hoverongaps: false
+            };
+        }
+
+        // Data for each heatmap
+        const dataStroke = [prepareHeatmapData(ctPropStroke)];
+        const dataNoStroke = [prepareHeatmapData(ctPropNoStroke)];
+
+        // Layouts
+        const layoutStroke = {
+            title: {
+                text: 'Heatmap of Proportions: Marital Status vs Work Type vs Residence Type (Had a Stroke)',
+                font: {
+                    family: 'Arial, sans-serif',
+                    size: 18,
+                    color: '#333'
+                },
+                xref: 'paper',
+                x: 0.5,
+            },
+            xaxis: {
+                title: 'Work Type and Residence Type',
+                titlefont: {
+                    family: 'Arial, sans-serif',
+                    size: 14,
+                    color: '#333'
+                },
+                tickfont: {
+                    family: 'Arial, sans-serif',
+                    size: 12,
+                    color: '#333'
+                }
+            },
+            yaxis: {
+                title: 'Marital Status',
+                titlefont: {
+                    family: 'Arial, sans-serif',
+                    size: 14,
+                    color: '#333'
+                },
+                tickfont: {
+                    family: 'Arial, sans-serif',
+                    size: 12,
+                    color: '#333'
+                }
+            },
+            margin: {
+                l: 100,
+                r: 20,
+                b: 100,
+                t: 80,
+                pad: 4
+            }
+        };
+
+        const layoutNoStroke = {
+            title: {
+                text: 'Heatmap of Proportions: Marital Status vs Work Type vs Residence Type (No Stroke)',
+                font: {
+                    family: 'Arial, sans-serif',
+                    size: 18,
+                    color: '#333'
+                },
+                xref: 'paper',
+                x: 0.5,
+            },
+            xaxis: {
+                title: 'Work Type and Residence Type',
+                titlefont: {
+                    family: 'Arial, sans-serif',
+                    size: 14,
+                    color: '#333'
+                },
+                tickfont: {
+                    family: 'Arial, sans-serif',
+                    size: 12,
+                    color: '#333'
+                }
+            },
+            yaxis: {
+                title: 'Marital Status',
+                titlefont: {
+                    family: 'Arial, sans-serif',
+                    size: 14,
+                    color: '#333'
+                },
+                tickfont: {
+                    family: 'Arial, sans-serif',
+                    size: 12,
+                    color: '#333'
+                }
+            },
+            margin: {
+                l: 100,
+                r: 20,
+                b: 100,
+                t: 80,
+                pad: 4
+            }
+        };
+
+        // Plot the heatmaps
+        Plotly.newPlot('heatmap-stroke', dataStroke, layoutStroke);
+        Plotly.newPlot('heatmap-no-stroke', dataNoStroke, layoutNoStroke);
+    </script>
+</body>
+</html>
