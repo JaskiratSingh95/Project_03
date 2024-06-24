@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV to JavaScript Plot</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="plot"></div>
+
+    <script>
+        // Load CSV data using Fetch API
+        fetch('http://127.0.0.1:5000/api/v1.0/stroke_biological_predictors_data')
+            .then(response => response.text())
+            .then(data => {
+                // Parse CSV data
+                const rows = data.split('\n');
+                const xData = [];
+                const yData = [];
+
+                rows.forEach(row => {
+                    const columns = row.split(',');
+                    xData.push(columns[0]);
+                    yData.push(columns[1]);
+                });
+
+                // Create a Plotly chart
+                const trace = {
+                    x: xData,
+                    y: yData,
+                    type: 'bar'
+                };
+
+                const layout = {
+                    title: 'CSV Data Plot',
+                    xaxis: { title: 'X Axis' },
+                    yaxis: { title: 'Y Axis' }
+                };
+
+                Plotly.newPlot('plot', [trace], layout);
+            })
+            .catch(error => console.error('Error loading CSV file:', error));
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Swarm Plot from Flask API</title>
+    <!-- Include Plotly.js -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+</head>
+<body>
+    <div id="plot"></div>
+
+    <script>
+
+//     const strokedata = "http://127.0.0.1:5000/project3"
+
+// let dataset = d3.json(strokedata).then(function(data){
+//     console.log(data);
+// })
+        // Fetch data from Flask API
+        fetch('http://127.0.0.1:5000/project3')
+            .then(response => response.json())
+            .then(data => {
+                let xData = data.map(d => d.bmi);
+                let yData = data.map(d => d.avg_glucose_level)});
+
+// Make all the colors semi-transparent so we can see overlapping dots
+const colors = Highcharts.getOptions().colors.map(color =>
+    Highcharts.color(color).setOpacity(0.5).get()
+);
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'scatter'
+    },
+
+    colors,
+
+    title: {
+        text: 'Scatter chart with jitter'
+    },
+
+    xAxis: {
+        categories: ['HYPOGLYCEMIC', 'PRE-DIABETIC', 'NORMAL', 'DIABETIC']
+    },
+
+    yAxis: {
+        title: {
+            text: 'BMI'
+        }
+    },
+
+    plotOptions: {
+        scatter: {
+            showInLegend: false,
+            jitter: {
+                x: 0.24,
+                y: 0
+            },
+            marker: {
+                radius: 2,
+                symbol: 'circle'
+            },
+            tooltip: {
+                pointFormat: 'Measurement: {point.y:.3f}'
+            }
+        }
+    },
+
+    series: [{
+        name: 'HYPOGLYCEMIC',
+        data: xData.push(data.stroke = 1)
+    }, {
+        name: 'Run 2',
+        data: getTestData(1)
+    }, {
+        name: 'Run 3',
+        data: getTestData(2)
+    }, {
+        name: 'Run 4',
+        data: getTestData(3)
+    }, {
+        name: 'Run 5',
+        data: getTestData(4)
+    }]
+});
+</script>
+</body>
+</html>

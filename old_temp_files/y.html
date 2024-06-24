@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<body>
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+
+fetch('http://127.0.0.1:5000/api/swarm_plot_data')
+    .then(response => response.json())
+    .then(data => {
+    var xData = data.map(d => d.bmi);
+    var yData = data.map(d => d.avg_glucose_level);
+
+// Generate test data with discrete X values and continuous Y values.
+const getTestData = x => {
+    const off = 0.2 + 0.2 * Math.random();
+    return new Array(200).fill(1).map(() => [
+        x,
+        off + (Math.random() - 0.5) * (Math.random() - 0.5)
+    ]);
+};
+
+// Make all the colors semi-transparent so we can see overlapping dots
+const colors = Highcharts.getOptions().colors.map(color =>
+    Highcharts.color(color).setOpacity(0.5).get()
+);
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'scatter'
+    },
+
+    colors,
+
+    title: {
+        text: 'Scatter chart with jitter'
+    },
+
+    xAxis: {
+        categories: ['Run 1', 'Run 2', 'Run 3', 'Run 4', 'Run 5']
+    },
+
+    yAxis: {
+        title: {
+            text: 'Measurements'
+        }
+    },
+
+    plotOptions: {
+        scatter: {
+            showInLegend: false,
+            jitter: {
+                x: 0.24,
+                y: 0
+            },
+            marker: {
+                radius: 2,
+                symbol: 'circle'
+            },
+            tooltip: {
+                pointFormat: 'Measurement: {point.y:.3f}'
+            }
+        }
+    },
+
+    series: [{
+        name: 'Run 1',
+        data: getTestData(0)
+    }, {
+        name: 'Run 2',
+        data: getTestData(1)
+    }, {
+        name: 'Run 3',
+        data: getTestData(2)
+    }, {
+        name: 'Run 4',
+        data: getTestData(3)
+    }, {
+        name: 'Run 5',
+        data: getTestData(4)
+    }]
+});

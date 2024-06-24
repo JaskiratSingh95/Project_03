@@ -3,8 +3,11 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
+from flask import Flask
+from flask_cors import CORS
 
-from flask import Flask, jsonify
+
+from flask import Flask, jsonify, request
 
 engine = create_engine("sqlite:///./Resources/stroke_db.sqlite")
 
@@ -15,6 +18,7 @@ Base.prepare(autoload_with=engine)
 stroke_predictors = Base.classes.stroke_predictors
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def welcome():
@@ -51,7 +55,7 @@ def stroke_demographic_predictors_data():
         subject_dict["Residence_type"] = Residence_type
         subject_dict["stroke"] = stroke
         all_subjects.append(subject_dict)
-
+    
     return jsonify(all_subjects)
 
 @app.route("/api/v1.0/stroke_biological_predictors_data")
@@ -80,7 +84,6 @@ def stroke_biological_predictors_data():
         all_subjects.append(subject_dict)
 
     return jsonify(all_subjects)
-
 
 if __name__ == '__main__':
     app.run(debug=True)

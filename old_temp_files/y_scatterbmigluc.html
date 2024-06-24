@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Swarm Plot from Flask API</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="plot"></div>
+
+    <script>
+        // Fetch data from Flask API
+        fetch('http://127.0.0.1:5000/api/swarm_plot_data')
+            .then(response => response.json())
+            .then(data => {
+                var xData = data.map(d => d.bmi);
+                var yData = data.map(d => d.avg_glucose_level);
+
+                // Create a trace for the swarm plot
+                var trace = {
+                    x: xData,
+                    y: yData,
+                    mode: 'markers',
+                    type: 'scatter',
+                    marker: {
+                        symbol: 'circle',
+                        size: 10
+                    }
+                };
+
+                // Define layout for the plot
+                var layout = {
+                    title: 'Swarm Plot',
+                    xaxis: { title: 'X Axis Label' },
+                    yaxis: { title: 'Y Axis Label' }
+                };
+
+                // Plot the swarm plot
+                Plotly.newPlot('plot', [trace], layout);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
