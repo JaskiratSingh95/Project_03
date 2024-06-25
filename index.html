@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Stroke Prediction Model</title>
+    <title>Stroke Predictor analysis</title>
   <head>
         <meta charset="UTF-8">
         <meta name="Stroke Prediction Analysis" content="width=device-width, initial-scale=1.0">
@@ -10,32 +10,58 @@
         <title>Dropdown Events</title>
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <style>
+          body {
+              font-family: Arial, sans-serif;
+          }
+          .heatmap-container {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin: 20px;
+          }
+          .heatmap {
+              width: 800px;
+              height: 600px;
+              margin-bottom: 50px;
+          }
+      </style>
   </head>
   <body>
-    <h2>STORKE PREDICTION MODEL</h2>
-    <p>Stroke is one of the leading causes of </p>
-    <!--<select id="selDataset">
-        <option value="australia">Australia</option>
-        <option value="brazil">Brazil</option>
-        <option value="uk">United Kingdom</option>
-        <option value="mexico">Mexico</option>
-        <option value="singapore">Singapore</option>
-        <option value="southAfrica">South Africa</option>
+    <h2>Stroke Predictor analysis</h2>
+    <p>Stroke is a serious medical condition that occurs when blood flow to the brain is disrupted, leading to brain cell damage. It can have devastating consequences, affecting both individuals and society as a whole. 
+      <br> 
+      <br>Every year, more than 795,000 people in the United States experience a stroke. Approximately 610,000 of these cases are first or new strokes, while around 185,000 are recurrent strokes (in people who have previously had a stroke). Stroke is a leading cause of serious long-term disability. It significantly reduces mobility in more than half of stroke survivors aged 65 and older. Sadly, someone in the US dies from a stroke approximately every 3 minutes and 14 seconds. Stroke-related costs in the US totaled nearly $56.5 billion between 2018 and 2019. These costs include healthcare services, stroke medications, and lost workdays. 
+      <br> 
+      <br>Therefore, Stroke prevention, awareness, and rapid response are critical. By understanding the impact of stroke, we can take proactive steps to reduce its occurrence and improve outcomes for affected individuals. <br> 
+      <br> From the Dropdown Menu below, please select an option and we will tell you more about its effect on Stroke</p>
+      <label for="stroke-factors">Select an option:</label>
+      <select id="stroke-factors">
+        <option value="AgeGenderStroke">Age and Gender</option>
+        <option value="BiologicalFactorsStroke">Biological Factors</option>
+        <option value="DemographicFactorsStroke">Demographic Factors</option>
+      </select>
+    <!-- <select id="stroke-factors">
+      <option value="AgeGenderStroke">Age and Gender</option>
+      <option value="BiologicalFactorsStroke">Biological Factors</option>
+      <option value="DemographicFactorsStroke">Demographic Factors</option>
     </select> -->
+    <div id="visualization"></div>
+    <div class="heatmap-container">
+      <div id="heatmap-stroke" class="heatmap"></div>
+      <div id="heatmap-no-stroke" class="heatmap"></div>
+      <div id="heatmap-Age-gender" class="heatmap"></div>
+   </div>
     
-    <!-- Marker cluster CSS -->
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
-
     <!-- Our CSS -->
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
 
   </head>
   <body>
-
     <!-- Our JavaScript for final project -->
-    <script type="text/javascript" src="static/js/logic.js"></script>
-    <script type="text/javascript" src="static/js/plots.js"></script>
+    <!--<script src="{{ url_for('static', filename='plots.js') }}"></script> -->
+    <script type="text/javascript" src="static/logicplot.js"></script>
+    <!--  <script type="text/javascript" src="static/plots.js"></script> -->
 
   </body>
 </html>
