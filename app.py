@@ -3,8 +3,10 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
-
-from flask import Flask, jsonify
+import sqlite3
+import pandas as pd
+from flask import Flask, jsonify, render_template 
+from flask_cors import CORS
 
 engine = create_engine("sqlite:///./Resources/stroke_db.sqlite")
 
@@ -14,8 +16,9 @@ Base.prepare(autoload_with=engine)
 
 stroke_predictors = Base.classes.stroke_predictors
 
-app = Flask(__name__)
-
+# app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
+CORS(app)
 @app.route("/")
 def welcome():
     """List all available api routes."""
@@ -25,6 +28,7 @@ def welcome():
         f"<h3> Data </h3><br/>"
         f"/api/v1.0/stroke_demographic_predictors_data<br/>"
         f"/api/v1.0/stroke_biological_predictors_data<br/>"
+        f"/api/data"
         f"<h3> Visualizations </h3><br/>"
         f"/api/v1.0/stroke_visualizations"
     )
@@ -81,18 +85,6 @@ def stroke_biological_predictors_data():
 
     return jsonify(all_subjects)
 
-
-if __name__ == '__main__':
-    app.run(debug=True)from flask import Flask, jsonify, render_template
-import sqlite3
-import pandas as pd
-
-app = Flask(__name__, static_folder='static')
-
-@app.route('/')
-def index():
-    return render_template('index_Jelena.html')
-
 @app.route('/api/data')
 def get_data():
     conn = sqlite3.connect('Resources/stroke_db.sqlite')  # Ensure database path is correct
@@ -110,5 +102,17 @@ def get_data():
         'y': df.columns.tolist()   # Row labels
     })
 
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+    
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+# @app.route('/')
+# def index():
+#     return render_template('index_Jelena.html')
