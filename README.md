@@ -29,12 +29,16 @@ Interactive Dashboard to showcase the Visualizations
 Instructions on how to use and interact with the project and Purpose 
 
 Goal of this project is to create an interactive dashboard with visualizations of different categories VS Stroke using APIs to call the data from SQLite database. 
+
+![project_diagram](https://github.com/JaskiratSingh95/Project_03/assets/161783742/abe7c1cc-05f9-418a-b97a-76bf56199bb0)
+
 We used Python to clean and transform data and store it on SQLite database using SQLALchemy’s ORM.
 Data is read from stroke_db.sqlite to create Flask API. 
 Rendering the Flask API using D3 library and JavaScript for the HTML.
 
 
 Please follow these steps to interact with our data visualizations and dashboard: 
+![Dashboard Screenshot](https://github.com/JaskiratSingh95/Project_03/assets/161783742/9998d341-6078-4864-8007-3ebadbbde2e3)
 
 In our GitHub main branch, please navigate to the Resources folder to ensure that both csv files “healthcare-dataset-stroke-data.csv” and “stroke_clean.csv” as well as stroke_db.sqlite are present. 
 The original file is the healthcare dataset csv, which was cleaned into stroke_clean.csv. 
