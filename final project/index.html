@@ -10,6 +10,9 @@
         <title>Dropdown Events</title>
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
         <style>
           body {
               font-family: Arial, sans-serif;
@@ -48,9 +51,11 @@
     </select> -->
     <div id="visualization"></div>
     <div class="heatmap-container">
+      <div id="container"></div>
       <div id="heatmap-stroke" class="heatmap"></div>
       <div id="heatmap-no-stroke" class="heatmap"></div>
       <div id="heatmap-Age-gender" class="heatmap"></div>
+      
    </div>
     
     <!-- Our CSS -->
@@ -59,9 +64,6 @@
   </head>
   <body>
     <!-- Our JavaScript for final project -->
-    <!--<script src="{{ url_for('static', filename='plots.js') }}"></script> -->
     <script type="text/javascript" src="static/logicplot.js"></script>
-    <!--  <script type="text/javascript" src="static/plots.js"></script> -->
-
   </body>
 </html>

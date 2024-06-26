@@ -4,40 +4,13 @@
 const selectElement = document.getElementById('stroke-factors');
 const visualizationContainer = document.getElementById('visualization');
 console.log('logicplot.js is running');
-function runOption1Script() {
-    console.log('Running option 1 script for Age and Gender on Stroke');
-    // Call the script for "Effect of age and gender on stroke"
-    const visualization = visualizeAgeGenderStroke();
-    console.log("random2");
-    console.log(visualization);
-    displayVisualization(visualization);
-  }
-  
-  function runOption2Script() {
-    console.log('Running option 2 script for biological factors on stroke');
-    // Call the script for "Effect of biological factors on stroke"
-    const visualization = visualizeBiologicalFactorsStroke();
-    displayVisualization(visualization);
-  }
-  
-  function runOption3Script() {
-    console.log('Running option 3 script for demographic factors on stroke');
-    // Call the script for "Effect of demographic factors on stroke"
-    const visualization = visualizeDemographicFactorsStroke();
-    console.log(visualization);
-    displayVisualization(visualization);
-  }
-  
+
 // Add an event listener to the dropdown menu
 selectElement.addEventListener('change', (event) => {
     console.log('Event listener triggered!');
     // Get the value of the selected option
     const selectedOption = event.target.value;
     console.log(`You selected: ${selectedOption}`);
-
-
-    // selectElement.addEventListener('change', (event) => {
-    //   const selectedOption = event.target.value;
 
     // Clear the visualization container
     visualizationContainer.innerHTML = '';
@@ -60,7 +33,30 @@ selectElement.addEventListener('change', (event) => {
   }
 });
 
-// Define placeholder functions for each option (we'll implement these later)
+function runOption1Script() {
+    console.log('Running option 1 script for Age and Gender on Stroke');
+    // Call the script for "Effect of age and gender on stroke"
+    const visualization = visualizeAgeGenderStroke();
+    console.log("random2");
+    console.log(visualization);
+    displayVisualization(visualization);
+  }
+  
+function runOption2Script() {
+    console.log('Running option 2 script for biological factors on stroke');
+    // Call the script for "Effect of biological factors on stroke"
+    const visualization = visualizeBiologicalFactorsStroke();
+    displayVisualization(visualization);
+  }
+  
+function runOption3Script() {
+    console.log('Running option 3 script for demographic factors on stroke');
+    // Call the script for "Effect of demographic factors on stroke"
+    const visualization = visualizeDemographicFactorsStroke();
+    console.log(visualization);
+    displayVisualization(visualization);
+  }
+  
 
 function visualizeAgeGenderStroke() {
   // Your script for visualizing the effect of age and gender on stroke
@@ -74,30 +70,7 @@ function visualizeAgeGenderStroke() {
         })
         .catch(error => console.error('Error fetching data:', error));
     }
-
-    // function plotHeatmap(data) {
-    //     var trace = {
-    //         z: data.z,
-    //         x: data.x,
-    //         y: data.y,
-    //         type: 'heatmap',
-    //         colorscale: 'Viridis'
-    //     };
-
-    //     var layout = {
-    //         title: 'Correlation Matrix',
-    //         xaxis: {
-    //             tickangle: -45
-    //         },
-    //         yaxis: {
-    //             autosize: true
-    //         }
-    //     };
-        
-
-    //     Plotly.newPlot('heatmap-container', [trace], layout);
-    // }
-
+    
     loadData();
 
     function plotHeatmap(data) { 
@@ -145,7 +118,6 @@ function visualizeAgeGenderStroke() {
         console.log("random3");
         console.log(graphAge);
         return [graphAge];
-
 }
 }
 
